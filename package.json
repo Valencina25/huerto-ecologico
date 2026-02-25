@@ -1,0 +1,10 @@
+{
+  "name": "huerto-ecologico",
+  "version": "1.0.0",
+  "description": "Huerto Ecológico - Productos Artesanales de Valencina",
+  "type": "module",
+  "scripts": {
+    "dev": "servor . --reload",
+    "build": "servor . dist --compress"
+  }
+}
