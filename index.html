@@ -116,12 +116,15 @@
             <h1 class="section-title">Panel de Administración</h1>
             
             <div id="admin-login" class="admin-card">
-                <h2>Iniciar Sesión</h2>
+                <h2>Iniciar Sesion</h2>
                 <form id="login-form" class="admin-form">
-                    <input type="password" id="admin-password" placeholder="Contraseña" required>
+                    <input type="password" id="admin-password" placeholder="Contrasena" required>
+                    <label style="display: block; margin: 0.5rem 0;">
+                        <input type="checkbox" id="remember-me"> Recordarme
+                    </label>
                     <button type="submit" class="btn btn-primary">Entrar</button>
                 </form>
-                <p id="login-error" style="color: red; margin-top: 1rem; display: none;">Contraseña incorrecta</p>
+                <p id="login-error" style="color: red; margin-top: 1rem; display: none;">Contrasena incorrecta</p>
             </div>
             
             <div id="admin-content" style="display: none;">

@@ -255,33 +255,41 @@ function showToast(message) {
 }
 
 function checkAdminAuth() {
+    var isLoggedIn = localStorage.getItem("adminLoggedIn") === "true";
     var loginEl = document.getElementById("admin-login");
     var contentEl = document.getElementById("admin-content");
     
-    loginEl.style.display = "block";
-    contentEl.style.display = "none";
-    document.getElementById("login-error").style.display = "none";
+    if (isLoggedIn) {
+        loginEl.style.display = "none";
+        contentEl.style.display = "block";
+    } else {
+        loginEl.style.display = "block";
+        contentEl.style.display = "none";
+    }
 }
 
 function handleLoginForm(e) {
     e.preventDefault();
     var password = document.getElementById("admin-password").value;
+    var rememberMe = document.getElementById("remember-me").checked;
     var storedPassword = localStorage.getItem("adminPassword");
     var loginError = document.getElementById("login-error");
     
     if (!storedPassword) {
         if (password === "huerto2024") {
-            localStorage.setItem("adminPassword", password);
+            if (rememberMe) {
+                localStorage.setItem("adminPassword", password);
+            }
             localStorage.setItem("adminLoggedIn", "true");
             checkAdminAuth();
-            showToast("Sesión iniciada");
+            showToast("Sesion iniciada");
         } else {
             loginError.style.display = "block";
         }
     } else if (password === storedPassword) {
         localStorage.setItem("adminLoggedIn", "true");
         checkAdminAuth();
-        showToast("Sesión iniciada");
+        showToast("Sesion iniciada");
     } else {
         loginError.style.display = "block";
     }
