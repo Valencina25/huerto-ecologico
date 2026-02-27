@@ -255,17 +255,12 @@ function showToast(message) {
 }
 
 function checkAdminAuth() {
-    var isLoggedIn = localStorage.getItem("adminLoggedIn") === "true";
     var loginEl = document.getElementById("admin-login");
     var contentEl = document.getElementById("admin-content");
     
-    if (isLoggedIn) {
-        loginEl.style.display = "none";
-        contentEl.style.display = "block";
-    } else {
-        loginEl.style.display = "block";
-        contentEl.style.display = "none";
-    }
+    loginEl.style.display = "block";
+    contentEl.style.display = "none";
+    document.getElementById("login-error").style.display = "none";
 }
 
 function handleLoginForm(e) {
