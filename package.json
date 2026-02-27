@@ -6,5 +6,10 @@
   "scripts": {
     "dev": "servor . --reload",
     "build": "servor . dist --compress"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.5",
+    "servor": "^4.0.2"
   }
 }

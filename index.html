@@ -115,34 +115,57 @@
         <div class="container">
             <h1 class="section-title">Panel de Administración</h1>
             
-            <div class="admin-card">
-                <h2>Añadir / Editar Producto</h2>
-                <form id="product-form" class="admin-form">
-                    <input type="hidden" id="product-id">
-                    <div class="form-row">
-                        <input type="text" id="prod-name" placeholder="Nombre del producto" required>
-                        <input type="number" id="prod-price" placeholder="Precio (€)" step="0.01" required>
-                    </div>
-                    <div class="form-row">
-                        <input type="text" id="prod-category" placeholder="Categoría" required>
-                        <input type="text" id="prod-producer" placeholder="Productor" required>
-                    </div>
-                    <input type="text" id="prod-image" placeholder="Nombre de imagen (ej: queso.jpg)" required>
-                    <button type="submit" class="btn btn-primary">Guardar Producto</button>
+            <div id="admin-login" class="admin-card">
+                <h2>Iniciar Sesión</h2>
+                <form id="login-form" class="admin-form">
+                    <input type="password" id="admin-password" placeholder="Contraseña" required>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
                 </form>
+                <p id="login-error" style="color: red; margin-top: 1rem; display: none;">Contraseña incorrecta</p>
             </div>
-
-            <div class="admin-card">
-                <h2>Lista de Productos</h2>
-                <div class="table-responsive">
-                    <table class="admin-table">
-                        <thead>
-                            <tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr>
-                        </thead>
-                        <tbody id="admin-list"></tbody>
-                    </table>
+            
+            <div id="admin-content" style="display: none;">
+                <div class="admin-card">
+                    <h2>Añadir / Editar Producto</h2>
+                    <form id="product-form" class="admin-form">
+                        <input type="hidden" id="product-id">
+                        <div class="form-row">
+                            <input type="text" id="prod-name" placeholder="Nombre del producto" required>
+                            <input type="number" id="prod-price" placeholder="Precio (€)" step="0.01" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="text" id="prod-category" placeholder="Categoría" required>
+                            <input type="text" id="prod-producer" placeholder="Productor" required>
+                        </div>
+                        <input type="file" id="prod-image" accept="image/*">
+                        <input type="text" id="prod-image-name" placeholder="O escribe nombre de imagen existente (ej: tomate.jpg)">
+                        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                    </form>
                 </div>
-                <button class="btn btn-danger" id="btn-reset">Resetear Productos</button>
+
+                <div class="admin-card">
+                    <h2>Lista de Productos</h2>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead>
+                                <tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr>
+                            </thead>
+                            <tbody id="admin-list"></tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-danger" id="btn-reset">Resetear Productos</button>
+                </div>
+                
+                <div class="admin-card">
+                    <h2>Cambiar Contraseña</h2>
+                    <form id="password-form" class="admin-form">
+                        <input type="password" id="new-password" placeholder="Nueva contraseña" required>
+                        <input type="password" id="confirm-password" placeholder="Confirmar contraseña" required>
+                        <button type="submit" class="btn btn-primary">Cambiar</button>
+                    </form>
+                </div>
+                
+                <button class="btn btn-danger" id="btn-logout">Cerrar Sesión</button>
             </div>
         </div>
     </section>
@@ -175,7 +198,6 @@
         <p>&copy; 2026 Huerto Ecológico | Calle Itálica 6, Valencina, Sevilla</p>
     </footer>
 
-    <script src="js/data.js"></script>
-    <script src="js/dashboard.js"></script>
+    <script src="js/app.js?v=2"></script>
 </body>
 </html>
