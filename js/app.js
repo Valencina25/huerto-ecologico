@@ -310,7 +310,48 @@ function handlePasswordForm(e) {
 function logout() {
     localStorage.setItem("adminLoggedIn", "false");
     checkAdminAuth();
-    showToast("Sesión cerrada");
+    showToast("Sesion cerrada");
+}
+
+function exportData() {
+    var data = {
+        products: products,
+        productImages: JSON.parse(localStorage.getItem("productImages") || "{}")
+    };
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "huerto-backup-" + new Date().toISOString().split("T")[0] + ".json";
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast("Backup exportado");
+}
+
+function importData(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        try {
+            var data = JSON.parse(event.target.result);
+            if (data.products) {
+                products = data.products;
+                saveProducts();
+            }
+            if (data.productImages) {
+                localStorage.setItem("productImages", JSON.stringify(data.productImages));
+            }
+            renderProducts(false);
+            renderAdminList();
+            showToast("Datos importados");
+        } catch(err) {
+            showToast("Error al importar");
+        }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
 }
 
 function handleContactForm(e) {
@@ -330,6 +371,11 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("login-form").addEventListener("submit", handleLoginForm);
     document.getElementById("password-form").addEventListener("submit", handlePasswordForm);
     document.getElementById("btn-logout").addEventListener("click", logout);
+    document.getElementById("btn-export").addEventListener("click", exportData);
+    document.getElementById("btn-import").addEventListener("click", function() {
+        document.getElementById("import-file").click();
+    });
+    document.getElementById("import-file").addEventListener("change", importData);
     
     document.querySelector(".checkout-btn").addEventListener("click", function() {
         if (cart.length === 0) {

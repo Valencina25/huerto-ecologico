@@ -148,11 +148,21 @@
                     <div class="table-responsive">
                         <table class="admin-table">
                             <thead>
-                                <tr><th>ID</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr>
+                                <tr><th>ID</th><th>Nombre</th><th>Categoria</th><th>Precio</th><th>Acciones</th></tr>
                             </thead>
                             <tbody id="admin-list"></tbody>
                         </table>
                     </div>
+                    <button class="btn btn-danger" id="btn-reset">Resetear Productos</button>
+                </div>
+                
+                <div class="admin-card">
+                    <h2>Backup</h2>
+                    <p>Exporta tus productos e imagenes para hacer backup</p>
+                    <button class="btn btn-primary" id="btn-export">Exportar Datos</button>
+                    <input type="file" id="import-file" accept=".json" style="margin-top: 1rem;">
+                    <button class="btn" id="btn-import">Importar Datos</button>
+                </div>
                     <button class="btn btn-danger" id="btn-reset">Resetear Productos</button>
                 </div>
                 
