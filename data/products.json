@@ -1,0 +1,7 @@
+[
+    { "id": 1, "name": "Tomate Ecologico", "price": 3.50, "category": "Verduras", "producer": "La Quinta", "image": "tomate.jpg" },
+    { "id": 2, "name": "Aguacate", "price": 4.00, "category": "Frutas", "producer": "Huerta Maria", "image": "aguacate.jpg" },
+    { "id": 3, "name": "Peras", "price": 3.00, "category": "Frutas", "producer": "El Pinar", "image": "peras.jpg" },
+    { "id": 4, "name": "Auricular", "price": 25.00, "category": "Varios", "producer": "Artesanos Locales", "image": "auriculare.jpg" },
+    { "id": 5, "name": "Botijo", "price": 35.00, "category": "Varios", "producer": "Barro y Agua", "image": "botijo.jpg" }
+]
