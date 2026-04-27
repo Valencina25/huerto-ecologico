@@ -375,8 +375,8 @@
                             <input type="text" id="prod-category" placeholder="Categoría" required>
                             <input type="text" id="prod-producer" placeholder="Productor" required>
                         </div>
-                        <input type="file" id="prod-image" accept="image/*">
-                        <input type="text" id="prod-image-name" placeholder="O escribe nombre de imagen existente (ej: tomate.jpg)">
+                        <input type="text" id="prod-image-name" placeholder="Nombre de imagen (ej: tomate.jpg)" required style="width:100%;padding:0.75rem;border:1px solid var(--color-border);border-radius:4px;">
+                        <small style="color:var(--color-text-light);">Las imágenes deben estar en la carpeta images/. Disponibles: tomate.jpg, aguacate.jpg, peras.jpg, auriculare.jpg, botijo.jpg, cebolla.jpg, cebolleta.jpg, pimiento.jpg, naranja.jpg, albaricoque.jpg, berejena.jpg, verdura.jpg, guirasol.jpg, hortensia.jpg</small>
                         <button type="submit" class="btn btn-primary">Guardar Producto</button>
                     </form>
                 </div>

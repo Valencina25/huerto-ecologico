@@ -680,55 +680,37 @@ document.addEventListener("DOMContentLoaded", function() {
             var price = parseFloat(document.getElementById("prod-price").value);
             var category = document.getElementById("prod-category").value.trim();
             var producer = document.getElementById("prod-producer").value;
-            var imageInput = document.getElementById("prod-image");
             var imageName = document.getElementById("prod-image-name").value;
 
-            var handleSave = function(image) {
-                // Normalizar categoría
-                category = category.trim().toLowerCase();
-                category = category.charAt(0).toUpperCase() + category.slice(1);
+            // Normalizar categoría
+            category = category.trim().toLowerCase();
+            category = category.charAt(0).toUpperCase() + category.slice(1);
 
-                if (idInput) {
-                    // Edit existing
-                    for (var i = 0; i < products.length; i++) {
-                        if (products[i].id === parseInt(idInput)) {
-                            products[i].name = name;
-                            products[i].price = price;
-                            products[i].category = category;
-                            products[i].producer = producer;
-                            if (image) products[i].image = image;
-                            else if (imageName) products[i].image = imageName;
-                            break;
-                        }
+            if (idInput) {
+                // Edit existing
+                for (var i = 0; i < products.length; i++) {
+                    if (products[i].id === parseInt(idInput)) {
+                        products[i].name = name;
+                        products[i].price = price;
+                        products[i].category = category;
+                        products[i].producer = producer;
+                        if (imageName) products[i].image = imageName;
+                        break;
                     }
-                } else {
-                    // New product
-                    var newId = nextProductId++;
-                    var newProd = {"id": newId, "name": name, "price": price, "category": category, "producer": producer, "image": image || imageName || "default.jpg"};
-                    products.push(newProd);
                 }
-                saveProducts();
-                renderCategoryFilters();
-                renderAdminProducts();
-                renderProducts(false);
-                productForm.reset();
-                document.getElementById("product-id").value = "";
-                showToast("Producto guardado");
-            };
-
-            if (imageInput && imageInput.files && imageInput.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(ev) {
-                    var imgData = ev.target.result;
-                    var fname = "img_" + Date.now() + ".jpg";
-                    PRODUCT_IMAGES[fname] = imgData;
-                    try { localStorage.setItem("productImages", JSON.stringify(PRODUCT_IMAGES)); } catch(e) {}
-                    handleSave(fname);
-                };
-                reader.readAsDataURL(imageInput.files[0]);
             } else {
-                handleSave(null);
+                // New product
+                var newId = nextProductId++;
+                var newProd = {"id": newId, "name": name, "price": price, "category": category, "producer": producer, "image": imageName || "default.jpg"};
+                products.push(newProd);
             }
+            saveProducts();
+            renderCategoryFilters();
+            renderAdminProducts();
+            renderProducts(false);
+            productForm.reset();
+            document.getElementById("product-id").value = "";
+            showToast("Producto guardado");
         });
     }
 

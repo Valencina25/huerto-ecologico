@@ -4,12 +4,14 @@
   "description": "Huerto Ecológico - Productos Artesanales de Valencina",
   "type": "module",
   "scripts": {
-    "dev": "servor . --reload",
-    "build": "servor . dist --compress"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
     "live-server": "^1.2.2",
     "serve": "^14.2.5",
-    "servor": "^4.0.2"
+    "servor": "^4.0.2",
+    "vite": "^8.0.10"
   }
 }
