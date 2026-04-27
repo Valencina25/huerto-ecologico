@@ -1,7 +1,178 @@
 [
-    { "id": 1, "name": "Tomate Ecologico", "price": 3.50, "category": "Verduras", "producer": "La Quinta", "image": "tomate.jpg" },
-    { "id": 2, "name": "Aguacate", "price": 4.00, "category": "Frutas", "producer": "Huerta Maria", "image": "aguacate.jpg" },
-    { "id": 3, "name": "Peras", "price": 3.00, "category": "Frutas", "producer": "El Pinar", "image": "peras.jpg" },
-    { "id": 4, "name": "Auricular", "price": 25.00, "category": "Varios", "producer": "Artesanos Locales", "image": "auriculare.jpg" },
-    { "id": 5, "name": "Botijo", "price": 35.00, "category": "Varios", "producer": "Barro y Agua", "image": "botijo.jpg" }
+    {
+        "id": 1,
+        "name": "Tomate Ecologico",
+        "price": 3.5,
+        "category": "Verduras",
+        "producer": "La Quinta",
+        "image": "tomate.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Aguacate",
+        "price": 4.0,
+        "category": "Frutas",
+        "producer": "Huerta Maria",
+        "image": "aguacate.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Peras",
+        "price": 3.0,
+        "category": "Frutas",
+        "producer": "El Pinar",
+        "image": "peras.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Auricular",
+        "price": 25.0,
+        "category": "Varios",
+        "producer": "Artesanos Locales",
+        "image": "auriculare.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Botijo",
+        "price": 35.0,
+        "category": "Varios",
+        "producer": "Barro y Agua",
+        "image": "botijo.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Acelga",
+        "price": 2.5,
+        "category": "Verduras",
+        "producer": "La Huerta",
+        "image": "acelga.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Ajos",
+        "price": 3.0,
+        "category": "Verduras",
+        "producer": "El Pinar",
+        "image": "ajos.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Berejena",
+        "price": 3.5,
+        "category": "Verduras",
+        "producer": "Huerta Maria",
+        "image": "berejena.jpg"
+    },
+    {
+        "id": 9,
+        "name": "Berejena Morada",
+        "price": 3.8,
+        "category": "Verduras",
+        "producer": "Huerta Maria",
+        "image": "berejena morada.jpg"
+    },
+    {
+        "id": 10,
+        "name": "Calabacin Negro",
+        "price": 2.8,
+        "category": "Verduras",
+        "producer": "La Quinta",
+        "image": "calabazin negro.jpg"
+    },
+    {
+        "id": 11,
+        "name": "Cebolla",
+        "price": 2.0,
+        "category": "Verduras",
+        "producer": "La Huerta",
+        "image": "cebolla.jpg"
+    },
+    {
+        "id": 12,
+        "name": "Cebollino",
+        "price": 1.8,
+        "category": "Verduras",
+        "producer": "La Huerta",
+        "image": "cebollino.jpg"
+    },
+    {
+        "id": 13,
+        "name": "Espinaca",
+        "price": 2.2,
+        "category": "Verduras",
+        "producer": "El Pinar",
+        "image": "espinaca.jpg"
+    },
+    {
+        "id": 14,
+        "name": "Fresa",
+        "price": 4.5,
+        "category": "Frutas",
+        "producer": "Frutales del Sur",
+        "image": "fresa.jpg"
+    },
+    {
+        "id": 15,
+        "name": "Lechuga",
+        "price": 1.5,
+        "category": "Verduras",
+        "producer": "La Quinta",
+        "image": "lechuga.jpg"
+    },
+    {
+        "id": 16,
+        "name": "Naranja",
+        "price": 3.0,
+        "category": "Frutas",
+        "producer": "Cítricos Valencianos",
+        "image": "naranja.jpg"
+    },
+    {
+        "id": 17,
+        "name": "Patata",
+        "price": 2.0,
+        "category": "Verduras",
+        "producer": "La Huerta",
+        "image": "patata.jpg"
+    },
+    {
+        "id": 18,
+        "name": "Pera",
+        "price": 3.2,
+        "category": "Frutas",
+        "producer": "El Pinar",
+        "image": "pera.jpg"
+    },
+    {
+        "id": 19,
+        "name": "Pimiento Italiano",
+        "price": 3.0,
+        "category": "Verduras",
+        "producer": "Huerta Maria",
+        "image": "pimiento italiano.jpg"
+    },
+    {
+        "id": 20,
+        "name": "Puerro",
+        "price": 2.5,
+        "category": "Verduras",
+        "producer": "La Huerta",
+        "image": "puerro.jpg"
+    },
+    {
+        "id": 21,
+        "name": "Tomate Rosa",
+        "price": 3.8,
+        "category": "Verduras",
+        "producer": "La Quinta",
+        "image": "tomate rosa.jpg"
+    },
+    {
+        "id": 22,
+        "name": "Zanohoria",
+        "price": 2.2,
+        "category": "Verduras",
+        "producer": "El Pinar",
+        "image": "zanohoria.jpg"
+    }
 ]
