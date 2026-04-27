@@ -19,6 +19,17 @@ var adminLoggedIn = false;
 var nextProductId = 100;
 
 // ===== CARGA DE DATOS =====
+function normalizeCategories() {
+    for (var i = 0; i < products.length; i++) {
+        if (products[i] && products[i].category) {
+            var cat = products[i].category.trim().toLowerCase();
+            // Capitalizar primera letra
+            products[i].category = cat.charAt(0).toUpperCase() + cat.slice(1);
+        }
+    }
+    saveProducts();
+}
+
 function loadData() {
     try {
         var stored = localStorage.getItem("products");
@@ -31,6 +42,23 @@ function loadData() {
         }
     } catch(e) {
         products = DEFAULT_PRODUCTS.slice();
+    }
+
+    normalizeCategories();
+
+    // Cargar desde data/products.json si no hay nada en localStorage
+    if (!products || products.length === 0) {
+        fetch("data/products.json")
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                products = data;
+                saveProducts();
+                renderProducts(false);
+                renderProducts(true);
+                renderAdminProducts();
+                renderCategoryFilters();
+            })
+            .catch(function() {});
     }
 
     try {
@@ -63,7 +91,11 @@ function loadData() {
     } catch(e) {}
 
     try {
-        adminLoggedIn = localStorage.getItem("adminLoggedIn") === "true";
+        if (localStorage.getItem("adminRemember") === "true") {
+            adminLoggedIn = true;
+        } else {
+            adminLoggedIn = localStorage.getItem("adminLoggedIn") === "true";
+        }
     } catch(e) {}
 
     try {
@@ -170,6 +202,13 @@ function filterByCategory(cat) {
 }
 
 // ===== MOSTRAR PRODUCTOS =====
+function getImageSrc(imageName) {
+    if (imageName && PRODUCT_IMAGES[imageName]) {
+        return PRODUCT_IMAGES[imageName];
+    }
+    return "images/" + (imageName || "default.jpg");
+}
+
 function renderProducts(home) {
     home = home || false;
     var gridId = home ? "featured-products" : "products-grid";
@@ -184,7 +223,7 @@ function renderProducts(home) {
     var html = "";
     for (var i = 0; i < productsToShow.length; i++) {
         var p = productsToShow[i];
-        var imgSrc = "images/" + p.image;
+        var imgSrc = getImageSrc(p.image);
         html += '<div class="product-card">' +
             '<div class="product-image">' +
             '<img src="' + imgSrc + '" alt="' + p.name + '" onerror="this.src=\'https://placehold.co/400x300/2d5a27/fff?text=' + encodeURIComponent(p.name) + '\'">' +
@@ -269,7 +308,7 @@ function renderCartItems() {
         var item = cart[i];
         var itemTotal = item.price * item.quantity;
         subtotal += itemTotal;
-        var imgSrc = "images/" + item.image;
+        var imgSrc = getImageSrc(item.image);
         html += '<div class="cart-item">' +
             '<img src="' + imgSrc + '" alt="' + item.name + '" onerror="this.src=\'https://placehold.co/100x100/2d5a27/fff?text=' + encodeURIComponent(item.name) + '\'">' +
             '<div class="cart-item-info">' +
@@ -479,6 +518,7 @@ function renderRegistros() {
     var html = "";
     for (var i = 0; i < registros.length; i++) {
         var r = registros[i];
+        var fotoHtml = r.foto ? '<img src="' + r.foto + '" alt="foto" style="max-width:60px;max-height:60px;border-radius:4px;">' : "-";
         html += '<tr>' +
             '<td>' + (r.fecha || "") + '</td>' +
             '<td>' + (r.tipo || "") + '</td>' +
@@ -486,6 +526,7 @@ function renderRegistros() {
             '<td>' + (r.producto || "") + '</td>' +
             '<td>' + (r.temp || "-") + '</td>' +
             '<td>' + (r.desc || "") + '</td>' +
+            '<td>' + fotoHtml + '</td>' +
             '<td>' + (r.precio ? r.precio + " €" : "-") + '</td>' +
             '<td><button class="btn btn-sm btn-danger" onclick="deleteRegistro(' + i + ')">Eliminar</button></td>' +
             '</tr>';
@@ -624,7 +665,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (logoutBtn) {
         logoutBtn.addEventListener("click", function() {
             adminLoggedIn = false;
-            try { localStorage.setItem("adminLoggedIn", "false"); } catch(e) {}
+            try { localStorage.setItem("adminLoggedIn", "false"); localStorage.removeItem("adminRemember"); } catch(e) {}
             showAdminContent();
         });
     }
@@ -637,12 +678,16 @@ document.addEventListener("DOMContentLoaded", function() {
             var idInput = document.getElementById("product-id").value;
             var name = document.getElementById("prod-name").value;
             var price = parseFloat(document.getElementById("prod-price").value);
-            var category = document.getElementById("prod-category").value;
+            var category = document.getElementById("prod-category").value.trim();
             var producer = document.getElementById("prod-producer").value;
             var imageInput = document.getElementById("prod-image");
             var imageName = document.getElementById("prod-image-name").value;
 
             var handleSave = function(image) {
+                // Normalizar categoría
+                category = category.trim().toLowerCase();
+                category = category.charAt(0).toUpperCase() + category.slice(1);
+
                 if (idInput) {
                     // Edit existing
                     for (var i = 0; i < products.length; i++) {
@@ -663,6 +708,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     products.push(newProd);
                 }
                 saveProducts();
+                renderCategoryFilters();
                 renderAdminProducts();
                 renderProducts(false);
                 productForm.reset();
@@ -687,7 +733,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Reset products
-    var resetBtn = document.getElementById("btn-reset");
+    var resetBtn = document.getElementById("btn-reset-products");
     if (resetBtn) {
         resetBtn.addEventListener("click", resetProducts);
     }
@@ -793,6 +839,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var html = "";
             for (var i = 0; i < filtered.length; i++) {
                 var r = filtered[i];
+                var fotoHtml = r.foto ? '<img src="' + r.foto + '" alt="foto" style="max-width:60px;max-height:60px;border-radius:4px;">' : "-";
                 html += '<tr>' +
                     '<td>' + (r.fecha || "") + '</td>' +
                     '<td>' + (r.tipo || "") + '</td>' +
@@ -800,6 +847,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     '<td>' + (r.producto || "") + '</td>' +
                     '<td>' + (r.temp || "-") + '</td>' +
                     '<td>' + (r.desc || "") + '</td>' +
+                    '<td>' + fotoHtml + '</td>' +
                     '<td>' + (r.precio ? r.precio + " €" : "-") + '</td>' +
                     '<td><button class="btn btn-sm btn-danger" onclick="deleteRegistro(' + registros.indexOf(r) + ')">Eliminar</button></td>' +
                     '</tr>';
